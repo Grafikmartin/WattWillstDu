@@ -1,0 +1,144 @@
+/* Container für die Suchkomponente */
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+}
+
+/* Suchfeld */
+.search-box {
+    display: flex;
+    align-items: center;
+    border: 2px solid #264E50;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 300px;
+    background-color: #F4E1BC;
+    padding: 5px;
+}
+.search-box input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background-color: #F4E1BC; /* Setzt die Hintergrundfarbe */
+    color: #264E50; /* Setzt die Textfarbe */
+}
+/* Lupe in Suchfeld */
+.search-icon {
+    color: #264E50;
+    margin-left: 10px;
+}
+
+/* Input-Feld */
+.search-box input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+/* Standort-Button */
+.location-button {
+    background-color: #E96E3F;
+    color: #F4E1BC;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Netzbetreiber Dropdown */
+.provider-dropdown {
+    position: relative;
+    width: 300px;
+}
+
+/* Button zum Öffnen des Dropdowns */
+.dropdown-toggle {
+    width: 100%;
+    padding: 10px;
+    background-color: #264E50;
+    color: #F4E1BC;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: left;
+}
+
+/* Dropdown-Liste */
+.dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #F4E1BC;
+    border: 1px solid #264E50;
+    max-height: 200px;
+    overflow-y: auto;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    color:  #264E50
+}
+
+/* Checkboxen im Dropdown */
+.container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.container input {
+    display: none;
+}
+
+.container svg {
+    overflow: visible;
+}
+
+.path {
+    fill: none;
+    stroke: #264E50;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
+    stroke-dasharray: 241 9999999;
+    stroke-dashoffset: 0;
+}
+
+.container input:checked ~ svg .path {
+    stroke-dasharray: 70.5096664428711 9999999;
+    stroke-dashoffset: -262.2723388671875;
+}
+/* Stile für Webkit-basierte Browser (Chrome, Edge, Safari) */
+.dropdown-list::-webkit-scrollbar {
+    width: 8px; /* Breite des Scrollbalkens */
+}
+
+.dropdown-list::-webkit-scrollbar-track {
+    background: #F4E1BC; /* Hintergrund des Scrollbereichs */
+    border-radius: 5px;
+}
+
+.dropdown-list::-webkit-scrollbar-thumb {
+    background: #264E50; /* Farbe des Scrollbalkens */
+    border-radius: 5px;
+}
+
+.dropdown-list::-webkit-scrollbar-thumb:hover {
+    background: #E96E3F; /* Farbe beim Hover */
+}
+
+/* Stile für Firefox */
+.dropdown-list {
+    scrollbar-width: thin;
+    scrollbar-color: #264E50 #F4E1BC; /* (Scrollbalken-Farbe, Hintergrund-Farbe) */
+}

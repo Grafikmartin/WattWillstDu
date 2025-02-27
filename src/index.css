@@ -26,3 +26,6 @@ nav {
   padding: 10px;
   border-radius: 8px;
 }
+html {
+  scroll-behavior: smooth;
+}

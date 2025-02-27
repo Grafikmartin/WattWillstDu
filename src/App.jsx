@@ -1,11 +1,14 @@
-import "./index.css";  // Import der CSS-Datei
-import Header from "./components/Header";
+import "./index.css";  
+import Header from "./components/Header";  
+import Nav from "./components/Nav";  
+import SearchComponent from "./components/SearchComponent";  
 
 export default function App() {
   return (
     <div>
       <Header />
-      <h1>WattWillstDu</h1>
+      <Nav />
+      <SearchComponent /> 
     </div>
   );
 }
