@@ -11,12 +11,13 @@
 .search-box {
     display: flex;
     align-items: center;
-    border: 2px solid #264E50;
-    border-radius: 8px;
+   
+    
     overflow: hidden;
     width: 300px;
     background-color: #F4E1BC;
-    padding: 5px;
+   
+    border-radius: 15px;
 }
 .search-box input {
     flex-grow: 1;
@@ -45,11 +46,14 @@
 /* Standort-Button */
 .location-button {
     background-color: #E96E3F;
+    padding: 20px;
     color: #F4E1BC;
-    padding: 10px 20px;
+    padding: 11px 20px;
+    width: 300px;
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     cursor: pointer;
+    font-weight: 600;
 }
 
 /* Netzbetreiber Dropdown */
@@ -60,25 +64,29 @@
 
 /* Button zum Öffnen des Dropdowns */
 .dropdown-toggle {
-    width: 100%;
-    padding: 10px;
-    background-color: #264E50;
+    background-color: #E96E3F;
+    padding: 20px;
     color: #F4E1BC;
+    padding: 11px 20px;
+    width: 300px;
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     cursor: pointer;
-    text-align: left;
+    font-weight: 600;
+
 }
 
 /* Dropdown-Liste */
 .dropdown-list {
+    margin-top: 5px;
     position: absolute;
     top: 100%;
-    left: 0;
+    left: -7%;
     width: 100%;
-    background: #F4E1BC;
+    background: rgba(244, 225, 188, 0.9);
+    padding: 20px;
     border: 1px solid #264E50;
-    max-height: 200px;
+    max-height: 300px;
     overflow-y: auto;
     border-radius: 5px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -120,17 +128,17 @@
 }
 /* Stile für Webkit-basierte Browser (Chrome, Edge, Safari) */
 .dropdown-list::-webkit-scrollbar {
-    width: 8px; /* Breite des Scrollbalkens */
+    width: 20px; /* Breite des Scrollbalkens */
 }
 
 .dropdown-list::-webkit-scrollbar-track {
     background: #F4E1BC; /* Hintergrund des Scrollbereichs */
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 .dropdown-list::-webkit-scrollbar-thumb {
     background: #264E50; /* Farbe des Scrollbalkens */
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 .dropdown-list::-webkit-scrollbar-thumb:hover {

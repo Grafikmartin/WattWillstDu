@@ -11,21 +11,10 @@ body {
   margin: 0;
 }
 
-/* H1 Styling */
-h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-top: 20px;
-}
 
 
 /* Menü-Styling */
-nav {
-  background-color: #E96E3F;
-  color: #264E50;
-  padding: 10px;
-  border-radius: 8px;
-}
+
 html {
   scroll-behavior: smooth;
 }
