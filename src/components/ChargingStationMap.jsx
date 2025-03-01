@@ -4,19 +4,53 @@ import { useState } from 'react';
 import { getStationDetails } from '../services/tomTomService';
 import 'leaflet/dist/leaflet.css';
 import './ChargingStationMap.css';
+import StationDetailsModal from './StationDetailsModal';
+
+// Importieren Sie ein benutzerdefiniertes Marker-Icon
+import L from 'leaflet';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
+// Leaflet Icon-Fix
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
 
 function ChargingStationMap({ stations, center, zoom }) {
-  const [selectedStationId, setSelectedStationId] = useState(null);
-  const [stationDetails, setStationDetails] = useState(null);
+  const [selectedStation, setSelectedStation] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleMarkerClick = async (stationId) => {
+  const handleMarkerClick = async (station) => {
     try {
-      setSelectedStationId(stationId);
-      const details = await getStationDetails(stationId);
-      setStationDetails(details);
+      setIsLoading(true);
+      setSelectedStation(station);
+      
+      // Laden Sie detaillierte Informationen, wenn verfügbar
+      if (station.id) {
+        const details = await getStationDetails(station.id);
+        setSelectedStation(prev => ({ ...prev, ...details }));
+      }
+      
+      setShowModal(true);
+      setIsLoading(false);
     } catch (err) {
       console.error("Fehler beim Laden der Stationsdetails:", err);
+      setIsLoading(false);
+      // Zeigen Sie das Modal trotzdem mit den grundlegenden Informationen an
+      setShowModal(true);
     }
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedStation(null);
   };
 
   return (
@@ -37,47 +71,35 @@ function ChargingStationMap({ stations, center, zoom }) {
             key={station.id}
             position={[station.latitude, station.longitude]}
             eventHandlers={{
-              click: () => handleMarkerClick(station.id)
+              click: () => handleMarkerClick(station)
             }}
           >
             <Popup>
               <div className="station-popup">
                 <h3>{station.name}</h3>
                 <p>{station.address}</p>
-                
-                <p>Betreiber: {station.operator || 'Unbekannt'}</p>
-                
-                {station.maxPowerKW > 0 && (
-                  <p>Max. Leistung: {station.maxPowerKW} kW</p>
-                )}
-                
-                {station.connectionTypes && station.connectionTypes.length > 0 && (
-                  <p>Anschlusstypen: {station.connectionTypes.join(', ')}</p>
-                )}
-                
-                {station.categories && station.categories.length > 0 && (
-                  <p>Kategorien: {station.categories.join(', ')}</p>
-                )}
-                
-                {stationDetails && selectedStationId === station.id && (
-                  <div className="station-details">
-                    <h4>Details:</h4>
-                    {stationDetails.openingHours && (
-                      <p>Öffnungszeiten: {stationDetails.openingHours}</p>
-                    )}
-                    {stationDetails.phone && (
-                      <p>Telefon: {stationDetails.phone}</p>
-                    )}
-                    {stationDetails.email && (
-                      <p>E-Mail: {stationDetails.email}</p>
-                    )}
-                  </div>
-                )}
+                <button 
+                  className="details-button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleMarkerClick(station);
+                  }}
+                >
+                  Details anzeigen
+                </button>
               </div>
             </Popup>
           </Marker>
         ))}
       </MapContainer>
+
+      {showModal && selectedStation && (
+        <StationDetailsModal 
+          station={selectedStation} 
+          onClose={closeModal} 
+          isLoading={isLoading}
+        />
+      )}
     </div>
   );
 }

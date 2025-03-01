@@ -18,3 +18,23 @@ body {
 html {
   scroll-behavior: smooth;
 }
+/* In index.css */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+ 
+}
+
+.app-content {
+  flex: 1;
+  padding-top: 20px; 
+  margin-top: 500px;
+ 
+}

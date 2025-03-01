@@ -1,0 +1,383 @@
+/* src/components/StationDetailsModal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.station-details-modal {
+  background-color: #264E50;
+  color: #F4E1BC;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #F4E1BC;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.close-button:hover {
+  color: #ffffff;
+}
+
+.station-details-modal h2 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 24px;
+  padding-right: 30px;
+}
+
+.station-address {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 18px;
+}
+
+/* Tabs Styling */
+.station-tabs {
+  margin-top: 20px;
+}
+
+.tab-headers {
+  display: flex;
+  border-bottom: 2px solid rgba(244, 225, 188, 0.3);
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  margin-right: 5px;
+  color: #F4E1BC;
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.7;
+  transition: all 0.2s;
+}
+
+.tab-button:hover {
+  opacity: 1;
+}
+
+.tab-button.active {
+  opacity: 1;
+  border-bottom: 3px solid #F4E1BC;
+}
+
+.tab-content {
+  min-height: 300px;
+}
+
+.tab-panel {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Verfügbarkeit Tab */
+.connectors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.connector-card {
+  background-color: rgba(244, 225, 188, 0.1);
+  border-radius: 6px;
+  padding: 15px;
+  transition: transform 0.2s;
+}
+
+.connector-card:hover {
+  transform: translateY(-3px);
+}
+
+.connector-card.available {
+  border-left: 4px solid #4CAF50;
+}
+
+.connector-card.occupied {
+  border-left: 4px solid #FF9800;
+}
+
+.connector-card.unavailable {
+  border-left: 4px solid #F44336;
+}
+
+.connector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.connector-type {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.connector-status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.status-available {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+}
+
+.status-occupied {
+  background-color: rgba(255, 152, 0, 0.2);
+  color: #FF9800;
+}
+
+.status-outofservice, .status-unknown {
+  background-color: rgba(244, 67, 54, 0.2);
+  color: #F44336;
+}
+
+.connector-details p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.availability-info {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(244, 225, 188, 0.2);
+}
+
+/* Kosten Tab */
+.pricing-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.price-card {
+  background-color: rgba(244, 225, 188, 0.1);
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.price-card h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.price-amount {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.price-validity {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 10px;
+}
+
+.payment-methods {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(244, 225, 188, 0.2);
+}
+
+.payment-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+.payment-list li {
+  background-color: rgba(244, 225, 188, 0.1);
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+/* Details Tab */
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+.detail-item {
+  display: grid;
+  grid-template-columns: 30px 120px 1fr;
+  align-items: center;
+  padding: 10px;
+  background-color: rgba(244, 225, 188, 0.05);
+  border-radius: 6px;
+}
+
+.detail-icon {
+  font-size: 20px;
+  text-align: center;
+}
+
+.detail-label {
+  font-weight: bold;
+}
+
+.detail-value a {
+  color: #F4E1BC;
+  text-decoration: underline;
+}
+
+.additional-info {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(244, 225, 188, 0.2);
+}
+
+/* Umgebung Tab */
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.amenity-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: rgba(244, 225, 188, 0.1);
+  border-radius: 6px;
+}
+
+.amenity-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.parking-info {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(244, 225, 188, 0.2);
+}
+
+/* Action Buttons */
+.station-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(244, 225, 188, 0.2);
+}
+
+.action-button {
+  padding: 10px 15px;
+  background-color: #F4E1BC;
+  color: #264E50;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.action-button:hover {
+  background-color: #ffffff;
+}
+
+.action-button .icon {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .station-details-modal {
+    width: 95%;
+    padding: 15px;
+  }
+  
+  .tab-headers {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 5px;
+  }
+  
+  .tab-button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  .connectors-grid, .pricing-info, .amenities-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .station-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .action-button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .detail-item {
+    grid-template-columns: 30px 1fr;
+  }
+  
+  .detail-label {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  
+  .detail-value {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
