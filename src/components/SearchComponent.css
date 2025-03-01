@@ -6,7 +6,12 @@
     gap: 10px;
     padding: 20px;
 }
-
+label {
+    font-size: 20px;
+    font-weight: 600;
+    color: #264E50;
+padding-left: 10px;
+}
 /* Suchfeld */
 .search-box {
     display: flex;
@@ -66,7 +71,7 @@
 .dropdown-toggle {
     background-color: #E96E3F;
     padding: 20px;
-    color: #F4E1BC;
+    color: #264E50;
     padding: 11px 20px;
     width: 300px;
     border: none;
