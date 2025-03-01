@@ -1,53 +1,84 @@
 // src/components/ChargingStationMap.jsx
-import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { useState } from 'react';
+import { getStationDetails } from '../services/tomTomService';
 import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
+import './ChargingStationMap.css';
 
-// Fix für das Marker-Icon-Problem in React
-// (Ohne diesen Fix werden die Marker-Icons nicht korrekt angezeigt)
-import icon from 'leaflet/dist/images/marker-icon.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+function ChargingStationMap({ stations, center, zoom }) {
+  const [selectedStationId, setSelectedStationId] = useState(null);
+  const [stationDetails, setStationDetails] = useState(null);
 
-let DefaultIcon = L.icon({
-  iconUrl: icon,
-  shadowUrl: iconShadow,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41]
-});
-L.Marker.prototype.options.icon = DefaultIcon;
+  const handleMarkerClick = async (stationId) => {
+    try {
+      setSelectedStationId(stationId);
+      const details = await getStationDetails(stationId);
+      setStationDetails(details);
+    } catch (err) {
+      console.error("Fehler beim Laden der Stationsdetails:", err);
+    }
+  };
 
-function ChargingStationMap({ stations = [], center = [51.165691, 10.451526], zoom = 6 }) {
   return (
-    <MapContainer center={center} zoom={zoom} style={{ height: '500px', width: '100%' }}>
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      {stations.map(station => (
-        <Marker 
-          key={station.ID} 
-          position={[station.AddressInfo.Latitude, station.AddressInfo.Longitude]}
-        >
-          <Popup>
-            <div>
-              <h3>{station.AddressInfo.Title}</h3>
-              <p>Adresse: {station.AddressInfo.AddressLine1}</p>
-              <p>Stadt: {station.AddressInfo.Town}</p>
-              <p>Anschlüsse: {station.Connections.length}</p>
-              {station.Connections.map((conn, idx) => (
-                <div key={idx}>
-                  <small>
-                    {conn.ConnectionType?.Title || 'Unbekannt'} - 
-                    {conn.PowerKW ? `${conn.PowerKW} kW` : 'Leistung unbekannt'}
-                  </small>
-                </div>
-              ))}
-            </div>
-          </Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+    <div className="map-container">
+      <MapContainer 
+        center={center} 
+        zoom={zoom} 
+        style={{ height: '100%', width: '100%' }}
+        key={`${center[0]}-${center[1]}-${zoom}`}
+      >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        
+        {stations.map(station => (
+          <Marker 
+            key={station.id}
+            position={[station.latitude, station.longitude]}
+            eventHandlers={{
+              click: () => handleMarkerClick(station.id)
+            }}
+          >
+            <Popup>
+              <div className="station-popup">
+                <h3>{station.name}</h3>
+                <p>{station.address}</p>
+                
+                <p>Betreiber: {station.operator || 'Unbekannt'}</p>
+                
+                {station.maxPowerKW > 0 && (
+                  <p>Max. Leistung: {station.maxPowerKW} kW</p>
+                )}
+                
+                {station.connectionTypes && station.connectionTypes.length > 0 && (
+                  <p>Anschlusstypen: {station.connectionTypes.join(', ')}</p>
+                )}
+                
+                {station.categories && station.categories.length > 0 && (
+                  <p>Kategorien: {station.categories.join(', ')}</p>
+                )}
+                
+                {stationDetails && selectedStationId === station.id && (
+                  <div className="station-details">
+                    <h4>Details:</h4>
+                    {stationDetails.openingHours && (
+                      <p>Öffnungszeiten: {stationDetails.openingHours}</p>
+                    )}
+                    {stationDetails.phone && (
+                      <p>Telefon: {stationDetails.phone}</p>
+                    )}
+                    {stationDetails.email && (
+                      <p>E-Mail: {stationDetails.email}</p>
+                    )}
+                  </div>
+                )}
+              </div>
+            </Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+    </div>
   );
 }
 

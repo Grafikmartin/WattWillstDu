@@ -1,7 +1,7 @@
 // src/components/ChargingStationFinder.jsx
 import { useState, useEffect } from 'react';
 import ChargingStationMap from './ChargingStationMap';
-import { fetchChargingStations, fetchConnectionTypes, fetchOperators } from '../services/openChargeMapService';
+import { fetchChargingStations, geocodeAddress } from '../services/tomTomService';
 import './ChargingStationFinder.css';
 
 function ChargingStationFinder() {
@@ -12,34 +12,11 @@ function ChargingStationFinder() {
     latitude: null,
     longitude: null,
     distance: 10,
-    operatorIds: [],
-    connectionTypeIds: [],
     minPowerKW: 0
   });
   const [address, setAddress] = useState('');
-  const [connectionTypes, setConnectionTypes] = useState([]);
-  const [operators, setOperators] = useState([]);
   const [mapCenter, setMapCenter] = useState([51.165691, 10.451526]); // Deutschland-Zentrum
   const [mapZoom, setMapZoom] = useState(6);
-
-  // Lade Referenzdaten beim ersten Rendern
-  useEffect(() => {
-    const loadReferenceData = async () => {
-      try {
-        const [typesData, operatorsData] = await Promise.all([
-          fetchConnectionTypes(),
-          fetchOperators()
-        ]);
-        setConnectionTypes(typesData);
-        setOperators(operatorsData);
-      } catch (err) {
-        setError("Fehler beim Laden der Referenzdaten");
-        console.error(err);
-      }
-    };
-    
-    loadReferenceData();
-  }, []);
 
   // Lade Ladestationen basierend auf Suchparametern
   useEffect(() => {
@@ -54,7 +31,7 @@ function ChargingStationFinder() {
         const data = await fetchChargingStations(searchParams);
         setStations(data);
       } catch (err) {
-        setError("Fehler beim Laden der Ladestationen");
+        setError(`Fehler beim Laden der Ladestationen: ${err.message}`);
         console.error(err);
       } finally {
         setLoading(false);
@@ -65,29 +42,22 @@ function ChargingStationFinder() {
   }, [searchParams]);
 
   // Funktion zur Geocodierung einer Adresse
-  const geocodeAddress = async () => {
+  const handleGeocodeAddress = async () => {
     if (!address.trim()) return;
     
     setLoading(true);
     try {
-      // Nominatim API für Geocoding (kostenlos)
-      const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
-      const data = await response.json();
+      const result = await geocodeAddress(address);
       
-      if (data && data.length > 0) {
-        const { lat, lon } = data[0];
-        setSearchParams(prev => ({
-          ...prev,
-          latitude: parseFloat(lat),
-          longitude: parseFloat(lon)
-        }));
-        setMapCenter([parseFloat(lat), parseFloat(lon)]);
-        setMapZoom(13);
-      } else {
-        setError("Adresse nicht gefunden");
-      }
+      setSearchParams(prev => ({
+        ...prev,
+        latitude: result.latitude,
+        longitude: result.longitude
+      }));
+      setMapCenter([result.latitude, result.longitude]);
+      setMapZoom(13);
     } catch (err) {
-      setError("Fehler bei der Adresssuche");
+      setError(`Fehler bei der Adresssuche: ${err.message}`);
       console.error(err);
     } finally {
       setLoading(false);
@@ -126,19 +96,25 @@ function ChargingStationFinder() {
       <h2>Ladestationen finden</h2>
       
       {/* Suchformular */}
-      <div className="search-form">
-        <div className="address-search">
+      <div className="search-container">
+        <div className="search-box">
+          <span className="search-icon">🔍</span>
           <input
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder="Adresse oder PLZ eingeben"
+            onKeyPress={(e) => e.key === 'Enter' && handleGeocodeAddress()}
           />
-          <button onClick={geocodeAddress} disabled={loading}>Suchen</button>
-          <button onClick={useCurrentLocation} disabled={loading}>
-            Aktuellen Standort verwenden
-          </button>
         </div>
+        
+        <button className="location-button" onClick={handleGeocodeAddress} disabled={loading}>
+          Suchen
+        </button>
+        
+        <button className="location-button" onClick={useCurrentLocation} disabled={loading}>
+          Aktuellen Standort verwenden
+        </button>
         
         <div className="search-options">
           <div className="radius-selector">
@@ -169,8 +145,6 @@ function ChargingStationFinder() {
               }))}
             />
           </div>
-          
-          {/* Hier könnten weitere Filter für Anschlusstypen und Betreiber hinzugefügt werden */}
         </div>
       </div>
       

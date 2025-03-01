@@ -1,42 +1,11 @@
-/* src/components/ChargingStationFinder.css */
-.charging-station-finder {
-  margin: 20px;
-  position: relative;
-}
-
+/* src/components/ChargingStationMap.css */
 .map-container {
   height: 500px;
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.loading-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(244, 225, 188, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  font-weight: bold;
-}
-
-.error-message {
-  color: #d32f2f;
-  padding: 10px;
-  background-color: #F4E1BC;
-  border-radius: 4px;
-  margin-bottom: 10px;
-}
-
-.station-popup {
-  min-width: 200px;
-  max-width: 300px;
+  margin-top: 20px;
 }
 
 .station-popup h3 {
@@ -49,7 +18,7 @@
 }
 
 .available {
-  color: #264E50;
+  color: #4caf50;
   font-weight: bold;
 }
 
@@ -61,5 +30,15 @@
 .station-details {
   margin-top: 10px;
   padding-top: 10px;
-  border-top: 1px solid #F4E1BC;
+  border-top: 1px solid #eee;
+}
+
+.station-details h4 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.station-details ul {
+  padding-left: 20px;
+  margin: 5px 0;
 }
