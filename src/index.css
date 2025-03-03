@@ -1,6 +1,10 @@
 /* Allgemeine Stile für die gesamte Seite */
 body {
-  background-color: #264E50;  /* Hintergrundfarbe */
+  background-image: url('public/zukunft.jpg'); /* Bildpfad */
+  background-size: cover; /* Stellt sicher, dass das Bild den gesamten Hintergrund abdeckt, ohne Verzerrung */
+  background-position: center; /* Zentriert das Bild */
+  background-repeat: no-repeat; /* Verhindert das Wiederholen des Bildes */
+  
   color: #F4E1BC;  /* Textfarbe */
   font-family: 'Work Sans', sans-serif;  /* Schriftart setzen */
   display: flex;
@@ -10,7 +14,6 @@ body {
   height: 100vh;
   margin: 0;
 }
-
 
 
 /* Menü-Styling */

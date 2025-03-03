@@ -1,6 +1,6 @@
 /* Navigation bleibt oben fixiert */
 .nav {
-  background-color: #264E50;
+  background-color: rgba(0, 0, 0, 0.6);
   color: #F4E1BC;
   padding: 15px;
   position: fixed;
