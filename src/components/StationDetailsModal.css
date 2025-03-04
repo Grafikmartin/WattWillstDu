@@ -21,7 +21,7 @@
 .station-details-modal {
   background-color: rgba(0, 0, 0, 0.8);
   color:white;
-  width: 80%;
+  width: 70%;
   max-width: 800px;
   max-height: 90vh;
   border-radius: 8px;
@@ -29,7 +29,7 @@
   position: relative;
   overflow-y: auto;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  animation: slideUp 0.3s ease-out;
+  animation: slideUp 0.5s ease-out;
 }
 
 @keyframes slideUp {
@@ -312,10 +312,12 @@
   padding-top: 20px;
   border-top: 1px solid rgba(244, 225, 188, 0.2);
 }
-
+button{
+  max-width: 30vw;
+}
 .action-button {
   padding: 10px 15px;
-  background-color:  rgba(255, 255, 255, 0.5);
+  background-color:  rgba(255, 255, 255, 1);
   color:black;
   border: none;
   border-radius: 15px;

@@ -23,10 +23,10 @@ function ChargingStationFinder() {
     const loadStations = async () => {
       // Nur suchen, wenn Koordinaten vorhanden sind
       if (!searchParams.latitude || !searchParams.longitude) return;
-      
+
       setLoading(true);
       setError(null);
-      
+
       try {
         const data = await fetchChargingStations(searchParams);
         setStations(data);
@@ -37,18 +37,18 @@ function ChargingStationFinder() {
         setLoading(false);
       }
     };
-    
+
     loadStations();
   }, [searchParams]);
 
   // Funktion zur Geocodierung einer Adresse
   const handleGeocodeAddress = async () => {
     if (!address.trim()) return;
-    
+
     setLoading(true);
     try {
       const result = await geocodeAddress(address);
-      
+
       setSearchParams(prev => ({
         ...prev,
         latitude: result.latitude,
@@ -70,7 +70,7 @@ function ChargingStationFinder() {
       setError("Geolokalisierung wird von Ihrem Browser nicht unterstützt");
       return;
     }
-    
+
     setLoading(true);
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -93,10 +93,11 @@ function ChargingStationFinder() {
 
   return (
     <div className="charging-station-finder">
-     <h2 className="finder-title">Finde deine Ladestation</h2>
       
-      {/* Suchformular */}
+
+
       <div className="search-container">
+      <h2 className="finder-title">Finde deine Ladestation</h2>
         <div className="search-box">
           <span className="search-icon">🔍</span>
           <input
@@ -107,15 +108,15 @@ function ChargingStationFinder() {
             onKeyPress={(e) => e.key === 'Enter' && handleGeocodeAddress()}
           />
         </div>
-        
+
         <button className="location-button" onClick={handleGeocodeAddress} disabled={loading}>
           Suchen
         </button>
-        
+
         <button className="location-button" onClick={useCurrentLocation} disabled={loading}>
           Aktuellen Standort verwenden
         </button>
-        
+
         <div className="search-options">
           <div className="radius-selector">
             <label>Umkreis: {searchParams.distance} km</label>
@@ -130,7 +131,7 @@ function ChargingStationFinder() {
               }))}
             />
           </div>
-          
+
           <div className="power-filter">
             <label>Min. Leistung: {searchParams.minPowerKW} kW</label>
             <input
@@ -147,13 +148,13 @@ function ChargingStationFinder() {
           </div>
         </div>
       </div>
-      
+
       {/* Fehlermeldung */}
       {error && <div className="error-message">{error}</div>}
-      
+
       {/* Ladeanzeige */}
       {loading && <div className="loading-indicator">Lade Daten...</div>}
-      
+
       {/* Ergebnisanzeige */}
       <div className="results-info">
         {stations.length > 0 ? (
@@ -162,10 +163,10 @@ function ChargingStationFinder() {
           <p>Keine Ladestationen im angegebenen Bereich gefunden</p>
         ) : null}
       </div>
-      
+
       {/* Karte */}
-      <ChargingStationMap 
-        stations={stations} 
+      <ChargingStationMap
+        stations={stations}
         center={mapCenter}
         zoom={mapZoom}
       />
