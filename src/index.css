@@ -1,10 +1,11 @@
 /* Allgemeine Stile für die gesamte Seite */
 body {
-  background-image: url('public/zukunft.jpg'); /* Bildpfad */
-  background-size: cover; /* Stellt sicher, dass das Bild den gesamten Hintergrund abdeckt, ohne Verzerrung */
+  background-image: url('/zukunft.jpg'); /* Relativer Pfad zum Bild im public-Ordner */
+  background-size: cover; /* Sorgt dafür, dass das Bild die gesamte Fläche bedeckt */
   background-position: center; /* Zentriert das Bild */
   background-repeat: no-repeat; /* Verhindert das Wiederholen des Bildes */
-  
+  background-attachment: fixed; /* Fixiert das Hintergrundbild für einen Parallax-Effekt */
+
   color: #F4E1BC;  /* Textfarbe */
   font-family: 'Work Sans', sans-serif;  /* Schriftart setzen */
   display: flex;

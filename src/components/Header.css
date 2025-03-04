@@ -1,23 +1,20 @@
-
+/* src/components/Header.css */
 .header {
-    
-   
-   position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    overflow: hidden;
-  }
-  
-  .logo {
-    margin-top: 100px;
-    margin-bottom: 50px;
-    max-width: 60vw;
-    width: auto;
-    height: auto;
-    max-height: 100px;
-  }
+  display: flex;
+  justify-content: center;
+  padding: 30px 20px;
+  background-color: transparent; /* Transparenter Hintergrund */
+  position: relative;
+  z-index: 1100; 
+}
+
+.logo-container {
+  flex: 0 0 auto;
+}
+
+.logo {
+  width: 30vw;
+  max-width: 300px;
+  height: auto;
+  display: block;
+}

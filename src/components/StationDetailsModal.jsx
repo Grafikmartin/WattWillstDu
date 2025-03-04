@@ -159,14 +159,14 @@ function StationDetailsModal({ station, onClose, isLoading }) {
                   <div className="tab-panel">
                     <div className="details-grid">
                       <div className="detail-item">
-                        <span className="detail-icon">🏢</span>
+                        <span className="detail-icon"></span>
                         <span className="detail-label">Betreiber:</span>
                         <span className="detail-value">{station.operator || 'Unbekannt'}</span>
                       </div>
                       
                       {station.openingHours && (
                         <div className="detail-item">
-                          <span className="detail-icon">🕒</span>
+                          <span className="detail-icon"></span>
                           <span className="detail-label">Öffnungszeiten:</span>
                           <span className="detail-value">{station.openingHours}</span>
                         </div>
@@ -190,7 +190,7 @@ function StationDetailsModal({ station, onClose, isLoading }) {
                       
                       {station.website && (
                         <div className="detail-item">
-                          <span className="detail-icon">🌐</span>
+                          <span className="detail-icon"></span>
                           <span className="detail-label">Website:</span>
                           <span className="detail-value">
                             <a href={station.website} target="_blank" rel="noopener noreferrer">
@@ -202,7 +202,7 @@ function StationDetailsModal({ station, onClose, isLoading }) {
                       
                       {station.accessType && (
                         <div className="detail-item">
-                          <span className="detail-icon">🔑</span>
+                          <span className="detail-icon"></span>
                           <span className="detail-label">Zugang:</span>
                           <span className="detail-value">{station.accessType}</span>
                         </div>
@@ -254,13 +254,13 @@ function StationDetailsModal({ station, onClose, isLoading }) {
             
             <div className="station-actions">
               <button className="action-button">
-                <span className="icon">🗺️</span> Route planen
+                <span className="icon"></span>Route planen
               </button>
               <button className="action-button">
-                <span className="icon">⭐</span> Als Favorit speichern
+                <span className="icon"></span>Als Favorit speichern
               </button>
               <button className="action-button">
-                <span className="icon">📱</span> Teilen
+                <span className="icon"></span>Teilen
               </button>
             </div>
           </>

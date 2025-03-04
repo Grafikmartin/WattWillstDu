@@ -1,21 +1,18 @@
 // src/components/ChargingStationMap.jsx
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import { useState } from 'react';
 import { getStationDetails } from '../services/tomTomService';
 import 'leaflet/dist/leaflet.css';
 import './ChargingStationMap.css';
 import StationDetailsModal from './StationDetailsModal';
 
-// Importieren Sie ein benutzerdefiniertes Marker-Icon
+// Importieren Sie das benutzerdefinierte Pin-Icon
 import L from 'leaflet';
-import markerIcon from 'leaflet/dist/images/marker-icon.png';
-import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import customPin from '../assets/PIN.png';
 
-// Leaflet Icon-Fix
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconUrl: markerIcon,
-  shadowUrl: markerShadow,
+// Benutzerdefiniertes Icon erstellen
+const customIcon = L.icon({
+  iconUrl: customPin,
   iconSize: [25, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
@@ -55,6 +52,11 @@ function ChargingStationMap({ stations, center, zoom }) {
 
   return (
     <div className="map-container">
+      {/* Navigation unter dem Logo */}
+      <div className="map-navigation">
+        <div className="nav-item">Finde deine Ladestation</div>
+      </div>
+      
       <MapContainer 
         center={center} 
         zoom={zoom} 
@@ -70,26 +72,11 @@ function ChargingStationMap({ stations, center, zoom }) {
           <Marker 
             key={station.id}
             position={[station.latitude, station.longitude]}
+            icon={customIcon}
             eventHandlers={{
               click: () => handleMarkerClick(station)
             }}
-          >
-            <Popup>
-              <div className="station-popup">
-                <h3>{station.name}</h3>
-                <p>{station.address}</p>
-                <button 
-                  className="details-button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleMarkerClick(station);
-                  }}
-                >
-                  Details anzeigen
-                </button>
-              </div>
-            </Popup>
-          </Marker>
+          />
         ))}
       </MapContainer>
 

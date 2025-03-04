@@ -93,7 +93,7 @@ function ChargingStationFinder() {
 
   return (
     <div className="charging-station-finder">
-      <h2>Ladestationen finden</h2>
+     <h2 className="finder-title">Finde deine Ladestation</h2>
       
       {/* Suchformular */}
       <div className="search-container">

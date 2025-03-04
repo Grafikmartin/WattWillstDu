@@ -13,17 +13,40 @@
 }
 
 .details-button {
-  background-color: #264E50;
-  color: #F4E1BC;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  color: black !important;
+  
   border: none;
   padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
   font-weight: bold;
-  transition: background-color 0.2s;
+  transition: background-color 0.3s ease;
 }
 
 .details-button:hover {
-  background-color: #1a3638;
+  background-color: rgba(255, 255, 255, 1) !important;
+}
+
+/* Für Plus/Minus-Zeichen in Leaflet */
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  color: white !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Für Popup-Styling */
+.leaflet-popup-content-wrapper {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  color: white !important;
+}
+
+.leaflet-popup-tip {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Alle Links und Texte im Popup weiß machen */
+.leaflet-popup-content * {
+  color: white !important;
 }

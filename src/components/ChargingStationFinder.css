@@ -1,10 +1,17 @@
 /* src/components/ChargingStationFinder.css */
 .charging-station-finder {
-  margin-top: 50px;
   padding: 20px;
   max-width: 1200px;
-  margin: 150px auto 20px; /* Erhöhter oberer Rand, um Platz für den Header zu schaffen */
-  ;
+  margin: 80px auto 20px; /* Reduzierter oberer Rand */
+}
+
+/* Neuer Stil für den Titel */
+.finder-title {
+  text-align: center;
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Schatten für bessere Lesbarkeit */
 }
 
 /* Container für die Suchkomponente */
@@ -14,8 +21,8 @@
   align-items: center;
   gap: 10px;
   padding: 20px;
-  margin-top: 20px; /* Reduziert von 50px, um mehr Platz oben zu haben */
-  background-color: rgba(244, 225, 188, 0.8);
+ 
+  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 15px;
 }
 
@@ -25,7 +32,7 @@
   align-items: center;
   overflow: hidden;
   width: 300px;
-  background-color: #F4E1BC;
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 15px;
 }
 
@@ -42,133 +49,26 @@
   border: none;
   outline: none;
   font-size: 16px;
-  background-color: #F4E1BC; /* Setzt die Hintergrundfarbe */
-  color: #264E50; /* Setzt die Textfarbe */
-}
-
-/* Standort-Button */
-.location-button {
-  background-color: #E96E3F;
-  color: #F4E1BC;
-  padding: 11px 20px;
-  width: 300px;
-  border: none;
-  border-radius: 15px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.location-button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
-
-/* Suchoptionen */
-.search-options {
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  gap: 15px;
-  margin-top: 10px;
-}
-
-.radius-selector, .power-filter {
-  width: 100%;
+  background-color: transparent; 
+  color: black;
 }
 
 .radius-selector label, .power-filter label {
-  display: block;
-  margin-bottom: 5px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #264E50;
-}
-
-.radius-selector input, .power-filter input {
-  width: 100%;
-  margin-top: 5px;
-}
-
-.error-message {
-  color: #d32f2f;
-  padding: 10px;
-  background-color: #ffebee;
-  border-radius: 4px;
-  margin: 10px 0;
-  text-align: center;
-  max-width: 60vw;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.loading-indicator {
-  text-align: center;
-  padding: 10px;
-  font-style: italic;
-  color: #666;
-}
-
-.results-info {
-  margin: 10px 0;
-  font-weight: bold;
-  text-align: center;
-}
-
-/* Anpassungen für die Karte */
-.map-container {
-  height: 500px;
-  width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-}
-
-/* Popup-Stile */
-.station-popup h3 {
-  margin-top: 0;
-  margin-bottom: 8px;
-  color: #264E50;
-}
-
-.station-popup p {
-  margin: 5px 0;
-  color: #333;
-}
-
-.available {
-  color: #4caf50;
-  font-weight: bold;
-}
-
-.unavailable {
-  color: #f44336;
-  font-weight: bold;
-}
-
-.station-details {
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid #eee;
-}
-
-/* Überschreiben der globalen Label-Stile für die Suchoptionen */
-.search-options label {
-  padding-left: 0;
+  color: white;
 }
 
 /* Responsive Anpassungen */
 @media (max-width: 768px) {
   .charging-station-finder {
-    margin-top: 120px;
+    margin-top: 70px; 
     padding: 10px;
   }
   
-  .search-container {
-    padding: 10px;
+  .finder-title {
+    font-size: 1.8rem;
   }
   
-  .map-container {
-    height: 400px;
+  .logo {
+    width: 50vw; 
   }
 }
