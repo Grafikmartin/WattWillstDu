@@ -6,14 +6,17 @@ import ChargingStationFinder from "./components/ChargingStationFinder";
 
 export default function App() {
   return (
-    <div className="app-container">
-      <div className="app-header">
-        <Header />
-        <Nav />
+    <>
+      <div className="container"></div>
+      <div className="app-container">
+        <div className="app-header">
+          <Header />
+          <Nav />
+        </div>
+        <div className="app-content">
+          <ChargingStationFinder />
+        </div>
       </div>
-      <div className="app-content">
-        <ChargingStationFinder />
-      </div>
-    </div>
+    </>
   );
 }

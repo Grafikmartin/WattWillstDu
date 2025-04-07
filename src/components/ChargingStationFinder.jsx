@@ -99,7 +99,7 @@ function ChargingStationFinder() {
       <div className="search-container">
       <h2 className="finder-title">Finde deine Ladestation</h2>
         <div className="search-box">
-          <span className="search-icon">🔍</span>
+          <span className="search-icon"></span>
           <input
             type="text"
             value={address}

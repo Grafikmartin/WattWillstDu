@@ -1,20 +1,21 @@
 /* src/components/ChargingStationFinder.css */
+
+/* Hauptcontainer */
 .charging-station-finder {
   padding: 20px;
   max-width: 1200px;
-  margin: 80px auto 20px; /* Reduzierter oberer Rand */
+  margin: 80px auto 20px;
 }
 
-/* Neuer Stil für den Titel */
+/* Titel */
 .finder-title {
   text-align: center;
-  color:rgb(14, 248, 6);
+  color: rgb(14, 248, 6);
   font-size: 1.5rem;
   margin-bottom: 20px;
-
 }
 
-/* Container für die Suchkomponente */
+/* Suchbereich */
 .search-container {
   display: flex;
   flex-direction: column;
@@ -25,53 +26,50 @@
   border-radius: 15px;
 }
 
-/* Suchfeld */
+/* Suchbox */
 .search-box {
+  position: relative;
   display: flex;
   align-items: center;
   overflow: hidden;
-  width: 300px;
+  width: 100%;
+  max-width: 500px;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 15px;
-}
-
-/* Lupe in Suchfeld */
-.search-icon {
-  color: #264E50;
-  margin-left: 10px;
+  margin-bottom: 30px;
 }
 
 /* Input-Feld */
 .search-box input {
   flex-grow: 1;
-  padding: 10px;
-  border: none;
-  outline: none;
+  width: 100%;
+  padding: 12px 40px;
+ 
+ 
   font-size: 16px;
-  background-color: transparent; 
-  color: black;
+  text-align: center;
 }
 
-.radius-selector label, .power-filter label {
-  color: white;
+.search-box input::placeholder {
+  color: rgba(133, 133, 133, 0.7);
+  text-align: center;
 }
 
-/* Responsive Anpassungen */
-@media (max-width: 768px) {
-  .charging-station-finder {
-    margin-top: 70px; 
-    padding: 10px;
-  }
-  
-  .finder-title {
-    font-size: 1.1rem;
-  }
-  
-  .logo {
-    width: 50vw; 
-  }
+.search-box input:focus {
+  outline: none;
+  border-color: rgb(14, 248, 6);
+  box-shadow: 0 0 10px rgba(14, 248, 6, 0.3);
 }
-/* From Uiverse.io by adamgiebl */ 
+
+/* Label-Stile */
+.radius-selector label,
+.power-filter label {
+ margin-top: 15px; color: white;
+  display: block;
+  text-align: center;
+}
+
+/* Button Styles – von Uiverse.io by adamgiebl */
 button {
   --green: rgba(14, 248, 6, 1);
   font-size: 15px;
@@ -79,18 +77,20 @@ button {
   letter-spacing: 0.06em;
   position: relative;
   font-family: inherit;
-  border-radius: 0.6em;
+  border-radius: 15px;
   overflow: hidden;
   transition: all 0.3s;
   line-height: 1.4em;
   border: 2px solid var(--green);
-  background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%,transparent 60% , rgba(27, 253, 156, 0.1) 100%);
+  background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%, transparent 60%, rgba(27, 253, 156, 0.1) 100%);
   color: var(--green);
   box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
 button:hover {
-  color: rgba(14, 248, 6, 1);
+  color: var(--green);
   box-shadow: inset 0 0 10px rgba(14, 248, 6, 0.6), 0 0 9px 3px rgba(27, 253, 156, 0.2);
 }
 
@@ -102,9 +102,60 @@ button:before {
   height: 100%;
   top: 0;
   transition: transform .4s ease-in-out;
-  background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%,rgba(27, 253, 156, 0.1) 60% , transparent 100%);
+  background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%, rgba(27, 253, 156, 0.1) 60%, transparent 100%);
 }
 
 button:hover:before {
   transform: translateX(15em);
+}
+/* Slider */
+/* Slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+  margin: 15px 0;
+}
+
+/* Webkit (Chrome, Safari, Edge) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: rgb(14, 248, 6);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -2px; /* Dies zentriert den Punkt auf der Linie */
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(14, 248, 6, 0.5);
+}
+
+/* Mozilla Firefox */
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: rgb(14, 248, 6);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(14, 248, 6, 0.5);
+}
+
+/* Microsoft Edge und IE */
+input[type="range"]::-ms-thumb {
+  width: 16px;
+  height: 16px;
+  background: rgb(14, 248, 6);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: 0; /* Für Edge */
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(14, 248, 6, 0.5);
 }

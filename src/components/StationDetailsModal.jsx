@@ -35,6 +35,7 @@ function StationDetailsModal({ station, onClose, isLoading }) {
   return (
     <div className="modal-overlay">
       <div className="station-details-modal">
+        
         <button className="close-button" onClick={onClose}>×</button>
         
         {isLoading ? (

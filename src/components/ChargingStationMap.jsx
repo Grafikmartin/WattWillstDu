@@ -54,7 +54,7 @@ function ChargingStationMap({ stations, center, zoom }) {
     <div className="map-container">
       {/* Navigation unter dem Logo */}
       <div className="map-navigation">
-        <div className="nav-item">Finde deine Ladestation</div>
+        <div className="nav-item"></div>
       </div>
       
       <MapContainer 
